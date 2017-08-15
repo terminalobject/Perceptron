@@ -12,13 +12,14 @@ MULTIPLIER = 1
 private
 
   def create_input_vector(headline)
-    {
-      multiplier: MULTIPLIER,
-      word_count: word_count(headline)}
+    Vector[*create_input_hash(headline).values]
   end
 
-  def feature_constructor(features)
-   features.map { |feature| "#{feature}: #{feature}(headline)" }
+  def create_input_hash(headline)
+    {
+      multiplier: MULTIPLIER,
+      word_count: word_count(headline)
+    }
   end
 
   def word_count(headline)
