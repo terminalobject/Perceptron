@@ -8,7 +8,6 @@ describe Weight do
   describe "#weight_vector_init" do
     it"creates a hash with n + 1 keys" do
       weight.weight_vector_init(key_array)
-      p weight.weight_vector
       expect(weight.weight_vector.keys.length).to eq 4
     end
     it "creates a BIAS key" do
