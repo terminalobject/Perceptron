@@ -2,27 +2,29 @@ require 'weight'
 
 describe Weight do
 
-  subject(:weight) { described_class.new }
-  let(:key_array) { ["w1", "w2", "w3"] }
+  let(:values) { [0, 1, 1] }
+  let(:updated_values) { [1, 1, 1] }
+  subject(:weight) { described_class.new(values) }
 
-  describe "#weight_vector_init" do
-    it"creates a hash with n + 1 keys" do
-      weight.weight_vector_init(key_array)
-      expect(weight.weight_vector.keys.length).to eq 4
+  describe "#vector_init" do
+
+    before do
+      weight.vector_init(values)
     end
-    it "creates a BIAS key" do
-      weight.weight_vector_init(key_array);
-      expect(weight.weight_vector.keys[0]).to eq "BIAS"
+
+    it "creates a vector of n+1 size" do
+      expect(weight.vector.size).to eq 4
     end
+
     it "generates BIAS value" do
-      weight.weight_vector_init(key_array)
-      expect(weight.weight_vector["BIAS"]).to eq Weight::BIAS
+      expect(weight.vector[0]).to eq Weight::BIAS
     end
+  end
 
-    it "creates a key for each feature" do
-      srand(1234)
-      weight.weight_vector_init(key_array)
-      expect(weight.weight_vector["w1"]).to eq 0.19151945027934003
+  describe "#update" do
+    it "updates the vector" do
+      weight.update(updated_values)
+      expect(weight.vector).to eq(Vector[Weight::BIAS, 1,1,1])
     end
   end
 end
