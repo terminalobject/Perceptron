@@ -2,28 +2,28 @@ class Parser
 
 MULTIPLIER = 1
 
-  def initialize
+  def initialize(file)
+    @data = File.foreach(file).map { |line| line.split("\n") }
   end
 
-  def create_input_vectors(training_data)
-    training_data.map { |headline| create_input_vector(headline) }
+  def parse(determination)
+    create_input_vectors(@data, determination == :good ? 0 : 1)
   end
 
 private
 
-  def create_input_vector(headline)
-    Vector[*create_input_hash(headline).values]
+  def create_input_vectors(training_data, determination)
+    training_data.map { |headline| create_input_hash(headline, determination) }
   end
 
-  def create_input_hash(headline)
+  def create_input_hash(headline, determination)
     {
-      multiplier: MULTIPLIER,
-      word_count: word_count(headline)
+      vector: [MULTIPLIER, word_count(headline)],
+      expected: determination
     }
   end
 
   def word_count(headline)
-    headline.split(' ').length
+    headline.first.split(' ').length
   end
-
 end
