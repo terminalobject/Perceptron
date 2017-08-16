@@ -2,12 +2,18 @@ class Parser
 
 MULTIPLIER = 1
 
-  def initialize(file)
-    @data = File.foreach(file).map { |line| line.split("\n") }
+attr_reader :data, :parse_data
+
+  def initialize
+    @data = []
+  end
+
+  def load_file(file)
+    File.foreach(file) { |line| @data << line.split("\n") }
   end
 
   def parse(determination)
-    create_input_vectors(@data, determination == :good ? 0 : 1)
+    @parse_data = create_input_vectors(@data, determination == :good ? 0 : 1)
   end
 
 private
