@@ -1,7 +1,7 @@
 require 'matrix'
 class Weight
   attr_reader :vector
-  BIAS = 1
+  BIAS = -3
 
   def initialize(array)
     @values = array
@@ -9,7 +9,7 @@ class Weight
   end
 
   def update(values)
-    @vector = vector_init(values)
+    @vector = Vector[*values]
   end
 
   private
