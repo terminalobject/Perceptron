@@ -12,8 +12,8 @@ class Perceptron
     @weight_vector.vector.inner_product vector
   end
 
-  def predict(hash)
-    scalar_product(hash) > 0 ? 1 : 0
+  def predict(vector)
+    scalar_product(vector) > 0 ? 1 : 0
   end
 
   def calculate_error(hash)

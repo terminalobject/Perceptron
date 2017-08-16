@@ -18,7 +18,7 @@ describe Weight do
   describe "#update" do
     it "updates the vector" do
       weight.update(updated_values)
-      expect(weight.vector).to eq(Vector[Weight::BIAS, 1,1,1])
+      expect(weight.vector).to eq(Vector[1, 1, 1])
     end
   end
 end
