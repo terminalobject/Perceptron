@@ -1,4 +1,3 @@
-require 'json'
 require 'parser'
 
 describe Parser do

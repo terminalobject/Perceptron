@@ -1,6 +1,5 @@
 require 'matrix'
 class Weight
-
   attr_reader :vector
   BIAS = 1
 
@@ -9,6 +8,12 @@ class Weight
     @vector = vector_init(array)
   end
 
+  def update(values)
+    @vector = vector_init(values)
+  end
+
+  private
+
   def vector_init(array)
     prepend_bias(array)
     Vector[*array]
@@ -16,9 +21,5 @@ class Weight
 
   def prepend_bias(array)
     array.unshift(BIAS)
-  end
-
-  def update(values)
-    @vector = vector_init(values)
   end
 end

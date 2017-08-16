@@ -18,7 +18,7 @@ describe Perceptron do
       allow(weight_vector).to receive(:inner_product)
         .with(input_vector)
         .and_return(2)
-      expect(perceptron.predict(input_vector)).to eq  1
+      expect(perceptron.predict(input_vector)).to eq 1
     end
   end
 
