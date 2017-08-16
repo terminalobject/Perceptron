@@ -17,10 +17,14 @@ class Perceptron
   end
 
   def calculate_error(hash)
-    hash.values[0] - predict(hash.keys.flatten)
+    hash[:expected] - predict(hash[:vector])
   end
 
   def compare(hash)
     @weight_vector.learn(calculate_error(hash)) unless calculate_error(hash).zero?
   end
+
+  def learn(hash)
+    @weight_vector.update(calculate_error(hash)) 
+  end 
 end
