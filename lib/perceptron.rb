@@ -2,16 +2,18 @@ require_relative 'weight'
 require 'matrix'
 
 class Perceptron
+  attr_reader :weight_vector
+
   def initialize(weight = Weight.new)
     @weight_vector = weight
   end
 
-  def scalar_product(input_vector)
-    @weight_vector.inner_product input_vector
+  def scalar_product(vector)
+    @weight_vector.vector.inner_product vector
   end
 
-  def predict(input_vector)
-    scalar_product(input_vector) > 0 ? 1 : 0
+  def predict(vector)
+    scalar_product(vector) > 0 ? 1 : 0
   end
 
   def calculate_error(hash)
@@ -19,10 +21,14 @@ class Perceptron
   end
 
   def compare(hash)
-    @weight_vector.learn(calculate_error(hash)) unless calculate_error(hash).zero?
+    learn(hash) unless calculate_error(hash).zero?
   end
 
   def learn(hash)
-    @weight_vector.update(calculate_error(hash))
+    @weight_vector.update(updated_weight_arr(hash))
+  end
+
+  def updated_weight_arr(hash)
+    (@weight_vector.vector + hash[:vector] * calculate_error(hash)).to_a
   end
 end
