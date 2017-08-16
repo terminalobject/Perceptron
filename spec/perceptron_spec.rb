@@ -1,8 +1,6 @@
 require 'perceptron'
 
 describe Perceptron do
-  let(:vector_a) { Vector[1,0] }
-  let(:vector_b) { Vector[1,1] }
   let(:weight_vector)  { double('weight', vector: Vector[-1, 0])}
   let(:input_vector)   { double('input', vector: Vector[2, 2])}
   let(:hash)           { { vector: Vector[1, 1], expected: 0 } }
@@ -36,12 +34,12 @@ describe Perceptron do
   end 
 
   describe "#updated_weight_arr" do
-    context "when discrepancy is zero" do
+    context "when prediction matches expectation" do
       it "determines how to update the weight vector" do
         expect(perceptron.updated_weight_arr(hash)).to eq([-1, 0])
       end
     end
-    context "when discrepancy is not zero" do
+    context "when prediction differs from expectation" do
       it "determines how to update the weight vector" do
         expect(perceptron.updated_weight_arr(hash_with_discrepancy)).to eq([0,1]) 
       end 
