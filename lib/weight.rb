@@ -1,7 +1,7 @@
 require 'matrix'
 class Weight
   attr_reader :vector
-  BIAS = -3
+  INITIAL_BIAS = -3
 
   def initialize(array)
     @values = array
