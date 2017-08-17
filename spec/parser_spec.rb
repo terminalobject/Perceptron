@@ -8,7 +8,7 @@ describe Parser do
       subject(:parser) { described_class.new }
 
       let(:first_output)  { { vector: [1, 8], expected: 1 } }
-      let(:second_output) { { vector: [1, 11], expected: 1 } }
+      let(:second_output) { { vector: [1, 12], expected: 1 } }
       let(:output)        { [first_output, second_output] }
 
       it 'returns a hash of input vectors' do

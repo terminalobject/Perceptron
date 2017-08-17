@@ -7,6 +7,7 @@ MULTIPLIER = 1
   def initialize(file)
     @data = File.foreach(file).map { |line| line.split("\n") }
     @starting_pronouns = ["He", "She", "I", "It", "You", "My", "It's", "They", "They'll", "He'll", "She'll", "You'll"]
+    @tracked_phrases = ["sex", "things", "number", "you'll", "these", "believe", "tips", "tweets", "never", "that will", "photos", "photo", "best", "make"]
   end
 
   def parse(determination)
@@ -23,8 +24,8 @@ private
     {
       vector: [MULTIPLIER,
                word_count(headline),
-               number_first_position(headline),
-               flagged_pronoun_first_position(headline)],
+               flagged_pronoun_first_position(headline), 
+               key_phrases(headline) + number_occurrences(headline)],
       expected: determination
     }
   end
@@ -33,12 +34,14 @@ private
     headline.first.split(' ').length
   end
 
-  def number_first_position(headline)
-    headline.first.split(' ')[0].to_i != 0 ? 1 : 0
-  end
-
   def flagged_pronoun_first_position(headline)
-    starting_pronouns.inject(0) { |r, w| w == headline.first.split(' ')[0] ? r + 1 : r }
+    starting_pronouns.inject(0) { |r, w| headline.first.split(" ")[0].to_i != 0 && r == 0 || headline.first.split(' ')[0] == w ? r + 1 : r }
   end
 
+  def key_phrases(headline)
+    @tracked_phrases.inject(0) { |r, phrase| headline.first.downcase.include?(phrase) ? r + 1 : r } 
+  end
+  def number_occurrences(headline)
+    headline.first.scan(/\d+/).count 
+  end 
 end

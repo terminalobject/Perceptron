@@ -1,5 +1,5 @@
 frequencies = Hash.new(0)
-arr = File.foreach('reuters.txt').map { |line| line.split('\n') }
+arr = File.foreach('buzzfeed.txt').map { |line| line.split('\n') }
 
 arr2 = arr.each do |array|
   array.each do |sentence|
