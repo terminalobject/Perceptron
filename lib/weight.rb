@@ -1,6 +1,8 @@
 require 'matrix'
+
 class Weight
   attr_reader :vector
+
   INITIAL_BIAS = -3
 
   def initialize(features_number)

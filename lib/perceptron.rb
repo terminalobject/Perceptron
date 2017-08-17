@@ -1,8 +1,7 @@
-require_relative 'weight'
 require 'matrix'
+require_relative 'weight'
 
 class Perceptron
-
   def initialize(features_number, weight = Weight.new(features_number))
     @weight = weight
   end
@@ -15,7 +14,8 @@ class Perceptron
     learn(hash) unless calculate_error(hash).zero?
   end
 
-private
+  private
+
   def scalar_product(vector)
     @weight.vector.inner_product vector
   end
