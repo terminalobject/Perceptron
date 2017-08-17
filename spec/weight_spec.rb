@@ -1,9 +1,8 @@
 require 'weight'
 
 describe Weight do
-  let(:values)         { [0, 1, 1] }
   let(:updated_values) { [1, 1, 1] }
-  subject(:weight)     { described_class.new(values) }
+  subject(:weight)     { described_class.new(3) }
 
   describe "Initialisation" do
     it "creates a vector of n+1 size" do
