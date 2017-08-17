@@ -11,7 +11,7 @@ describe Weight do
     end
 
     it "generates BIAS value" do
-      expect(weight.vector[0]).to eq Weight::BIAS
+      expect(weight.vector[0]).to eq Weight::INITIAL_BIAS
     end
   end
 

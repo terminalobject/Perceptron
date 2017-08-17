@@ -20,6 +20,6 @@ class Weight
   end
 
   def prepend_bias(array)
-    array.unshift(BIAS)
+    array.unshift(INITIAL_BIAS)
   end
 end
