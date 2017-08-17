@@ -24,7 +24,7 @@ private
     {
       vector: [MULTIPLIER,
                word_count(headline),
-               flagged_pronoun_first_position(headline), 
+               first_word(headline), 
                key_phrases(headline) + number_occurrences(headline)],
       expected: determination
     }
@@ -34,7 +34,7 @@ private
     headline.first.split(' ').length
   end
 
-  def flagged_pronoun_first_position(headline)
+  def first_word(headline)
     starting_pronouns.inject(0) { |r, w| headline.first.split(" ")[0].to_i != 0 && r == 0 || headline.first.split(' ')[0] == w ? r + 1 : r }
   end
 
