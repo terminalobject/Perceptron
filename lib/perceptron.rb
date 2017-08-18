@@ -4,6 +4,8 @@ require 'matrix'
 class Perceptron
   attr_reader :weight_vector, :parser
 
+  EPOCHS = 1000
+
   def initialize(weight = Weight.new, parser = Parser.new)
     @weight_vector = weight
     @parser = parser
@@ -34,6 +36,6 @@ class Perceptron
   end
 
   def training
-    @parser.parse_data.each { |hash| compare(hash) }
+    150.times { @parser.parse_data.each { |hash| print learn(hash) } }
   end
 end

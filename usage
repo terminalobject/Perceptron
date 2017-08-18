@@ -1,12 +1,13 @@
 require ('./lib/parser.rb')
 require ('./lib/perceptron.rb')
-w = Weight.new([1])
+w = Weight.new([1, 1, 1])
 p = Perceptron.new(w)
 
+p.parser.load_file('spec/fixtures/good_data.txt')
+p.parser.parse(:good)
 p.parser.load_file('spec/fixtures/bad_data.txt')
-
-p.parser.load_file('scraper/training_data/buzzfeed.txt')
 p.parser.parse(:bad)
+
 p.parser.parse_data
 p.training
 p.weight_vector

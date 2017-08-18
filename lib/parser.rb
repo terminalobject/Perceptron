@@ -6,6 +6,7 @@ MULTIPLIER = 1
 
   def initialize
     @data = []
+    @parse_data = []
     @starting_pronouns = ["He", "She", "I", "It", "You", "My", "It's", "They", "They'll", "He'll", "She'll", "You'll"]
     @tracked_phrases = ["sex", "things", "number", "you'll", "these", "believe", "tips", "tweets", "never", "that will", "photos", "photo", "best", "make"]
   end
@@ -15,7 +16,8 @@ MULTIPLIER = 1
   end
 
   def parse(determination)
-    @parse_data = create_input_vectors(@data, determination == :good ? 0 : 1)
+    create_input_vectors(@data, determination == :good ? 0 : 1).each { |h| @parse_data.push(h)}
+    @data = []
   end
 
 
