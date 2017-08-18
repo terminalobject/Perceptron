@@ -6,8 +6,8 @@ const cheerio = require('cheerio')
 function parse(str) {
   const find = cheerio.load(str)
 
-  find('a.full-item-title').each(function(i, elem) {
-    fs.appendFileSync('cosmopolitan', find(this).text().trim() + '\n', 'UTF8')
+  find('h3').each(function(i, elem) {
+    fs.appendFileSync('telegraph.txt', find(this).text().trim() + '\n', 'UTF8')
   });
 }
 
@@ -24,15 +24,23 @@ var callback = function(response) {
   });
 }
 
-var i = 1;
+var i = 0;
 var timer = setInterval(function() {
     i++;
-    console.log('Fetched page', i);
+    console.log('Fetched page');
     http.request({
-      host: 'www.cosmopolitan.com',
-      path: `/uk/ajax/infiniteload/?id=a6d2cadc-58df-4c89-9335-f429542f1066&class=CoreModels%5Csections%5CSectionModel&viewset=homepage&page=${i}`
+      host: 'www.telegraph.co.uk',
+      path: `/news/loadmore${i}/`
     }, callback).end();
-    if (i == 20) {
+    if (i == 100) {
       clearInterval(timer);
     }
-  }, 400);
+  }, 1000);
+
+// Cracked
+// host: 'www.cracked.com',
+// path: `/past_featured_ajax/?page=${i}&ajax=true&ts=1503052726005`
+
+// Business Insider
+// host: 'uk.businessinsider.com',
+// path: `/?page=${i}`
