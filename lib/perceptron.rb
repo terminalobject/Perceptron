@@ -18,6 +18,10 @@ class Perceptron
     learn(hash) unless calculate_error(hash).zero?
   end
 
+  def training
+    EPOCHS.times { @parser.parse_data.each { |hash| print learn(hash) } }
+  end
+  
   private
 
   def scalar_product(vector)
@@ -34,9 +38,5 @@ class Perceptron
 
   def updated_weight_arr(hash)
     (@weight_vector.vector + Vector[*hash[:vector]] * calculate_error(hash)).to_a
-  end
-
-  def training
-    EPOCHS.times { @parser.parse_data.each { |hash| print learn(hash) } }
   end
 end
