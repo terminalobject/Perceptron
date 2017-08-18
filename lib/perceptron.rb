@@ -36,6 +36,6 @@ class Perceptron
   end
 
   def training
-    150.times { @parser.parse_data.each { |hash| print learn(hash) } }
+    EPOCHS.times { @parser.parse_data.each { |hash| print learn(hash) } }
   end
 end
