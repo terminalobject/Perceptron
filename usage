@@ -1,6 +1,6 @@
 require ('./lib/parser.rb')
 require ('./lib/perceptron.rb')
-w = Weight.new([1])
+w = Weight.new([1, 1, 1])
 p = Perceptron.new(w)
 
 p.parser.load_file('spec/fixtures/bad_data.txt')

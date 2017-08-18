@@ -1,0 +1,10 @@
+require './scraper/training_data/sanitiser.rb'
+s = Sanitiser.new
+s.load('scraper/training_data/raw/business-insider.txt')
+s.parse_data(:good)
+s.zipping
+s.clean
+s.create_output
+
+
+s.output_data
