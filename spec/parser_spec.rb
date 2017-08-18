@@ -13,7 +13,8 @@ describe Parser do
 
       it 'returns a hash of input vectors' do
         parser.load_file("#{file_path}/fixtures/bad_data.txt")
-        expect(parser.parse(:bad)).to eq output
+        parser.parse(:bad)
+        expect(parser.parse_data).to eq output
       end
     end
 
@@ -26,7 +27,8 @@ describe Parser do
 
       it 'returns a hash of input vectors' do
         parser.load_file("#{file_path}/fixtures/good_data.txt")
-        expect(parser.parse(:good)).to eq output
+        parser.parse(:good)
+        expect(parser.parse_data).to eq output
       end
     end
   end
