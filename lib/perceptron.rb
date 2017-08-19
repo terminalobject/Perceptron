@@ -9,7 +9,7 @@ class Perceptron
   end
 
   def predict(vector)
-    scalar_product(vector) > 0 ? 1 : 0
+    scalar_product(@weight.vector, vector) > 0 ? 1 : 0
   end
 
   def train(hash)
@@ -18,8 +18,8 @@ class Perceptron
 
   private
 
-  def scalar_product(vector)
-    @weight.vector.inner_product vector
+  def scalar_product(vector_1, vector_2)
+    vector_1.inner_product vector_2
   end
 
   def calculate_error(hash)
