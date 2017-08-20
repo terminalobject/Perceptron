@@ -1,4 +1,4 @@
-var http = require('http')
+var https = require('https')
 var fs = require('fs')
 
 const cheerio = require('cheerio')
@@ -6,8 +6,8 @@ const cheerio = require('cheerio')
 function parse(str) {
   const find = cheerio.load(str)
 
-  find('h3').each(function(i, elem) {
-    fs.appendFileSync('telegraph.txt', find(this).text().trim() + '\n', 'UTF8')
+  find('h3.title').each(function(i, elem) {
+    fs.appendFileSync('collegehumor.txt', find(this).text().trim() + '\n', 'UTF8')
   });
 }
 
@@ -24,18 +24,18 @@ var callback = function(response) {
   });
 }
 
-var i = 0;
+var i = 20;
 var timer = setInterval(function() {
     i++;
     console.log('Fetched page');
-    http.request({
-      host: 'www.telegraph.co.uk',
-      path: `/news/loadmore${i}/`
+    https.request({
+      host: 'www.collegehumor.com',
+      path: `/articles/page:${i}`
     }, callback).end();
-    if (i == 100) {
+    if (i == 50) {
       clearInterval(timer);
     }
-  }, 1000);
+  }, 500);
 
 // Cracked
 // host: 'www.cracked.com',
