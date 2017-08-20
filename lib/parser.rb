@@ -7,10 +7,10 @@ MULTIPLIER = 1
   def initialize
     @data = []
     @parse_data = []
-    @starting_pronouns = ["He", "She", "I", "It", "You", "My", "It's", "They", "They'll", "He'll", "She'll", "You'll"]
-    @key_words = ["sex", "things", "number", "you'll", "these", "believe", "tips", "tweets", "never", "photos", "photo", "best", "make", "just"]
-    @key_phrases = ["here's why", "here's what", "you'll never", "that will", "this is", "how to", "the most", "what this", "when you", "and it's",
-                    "wait till", "this guy", "blow your", "the reason", "make you", "looks like", "pictures of"]
+    @starting_pronouns = ["he", "she", "i", "it", "you", "my", "it's", "they", "they'll", "he'll", "she'll", "you'll", "here's", "this", "people", "how", "why", "memes"]
+    @key_words = ["sex", "things", "number", "you'll", "these", "believe", "tips", "tweets", "never", "photos", "photo", "best", "make", "just", "kardashian", "jenner", "memes"]
+    @key_phrases = ["here's why", "here's what", "you'll never", "that will", "this is", "how to", "the most", "what this", "when you", "and it's", "and we'll",
+                    "wait till", "this guy", "blow your", "the reason", "make you", "looks like", "pictures of", "the internet", "can you", "you didn't", "you need"]
   end
 
   def load_file(file)
@@ -22,6 +22,10 @@ MULTIPLIER = 1
     @data = []
   end
 
+  def parse_individual(determination, str)
+    p str
+    create_input_hash(str, determination)
+  end
 
 private
 

@@ -13,8 +13,9 @@ class Sanitiser
   end
 
  def load(file)
-   parser.load_file(file)
-   @data = parser.data
+   File.foreach(file) { |line| @data << line.downcase.split("\n") }
+  #  parser.load_file(file)
+  #  @data = parser.data
  end
 
  def parse_data(determination)
@@ -25,13 +26,34 @@ class Sanitiser
     @zipped_data = data.zip(parser.parse_data)
   end
 
+  def clean_data
+    @data.each do |headline|
+      vector = parser.parse_individual(:good, headline)
+      if vector[:vector][1..3].reduce(:+) > 1
+        @bad_file.puts headline
+      else
+        @good_file.puts headline
+        p "test"
+      end
+
+      @counter += 1
+    end
+
+    @data = []
+  end
+
   def clean
    zipped_data.each do |x|
-     if (x.last[:vector][2..3].reduce(:+) > 1)
+     if (x.last[:vector][1..3].reduce(:+) > 1)
        zipped_data.delete_at(zipped_data.index(x))
        @counter += 1
      end
    end
+ end
+
+ def create_output_file
+   @good_file = File.new('scraper/training_data/good.txt', 'a')
+   @bad_file = File.new('scraper/training_data/bad.txt', 'a')
  end
 
  def create_output
