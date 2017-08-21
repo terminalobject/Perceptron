@@ -40,7 +40,7 @@ private
   end
 
   def first_word(headline)
-    starting_pronouns.inject(0) { |r, w| headline.first.split(" ")[0].to_i != 0 && r == 0 || headline.first.split(' ')[0] == w ? r + 1 : r }
+    starting_pronouns.inject(0) { |r, w| p headline.first; headline.first.split(" ")[0].to_i != 0 && r == 0 || headline.first.split(' ')[0] == w ? r + 1 : r }
   end
 
   def key_words(headline)

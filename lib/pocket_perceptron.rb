@@ -1,7 +1,7 @@
 require 'matrix'
 require_relative 'weight'
 
-class Perceptron
+class PocketPerceptron
 
   def initialize(features_number, weight = Weight.new(features_number))
     @weight = weight
@@ -21,7 +21,6 @@ class Perceptron
       if calculate_error(hash, predict_temp).zero?
         @temp_weight.correct_run += 1
         if @temp_weight.correct_run > @weight.correct_run
-          num_ok(array, predict_temp)
           if num_ok(array, predict_temp) > num_ok(array, predict)
             @weight = @temp_weight
             @weight.correct_run = @temp_weight.correct_run
@@ -53,7 +52,11 @@ class Perceptron
   end
   
   def num_ok(array, type)
-    @weight.correct_total = array.map{ |element| calculate_error(element, type) }.count(0)
+    if type = predict
+      @weight.correct_total = array.map{ |element| calculate_error(element, type) }.count(0)
+    else type = predict_temp
+      @temp_weight.correct_total = array.map{ |element| calculate_error(element, type) }.count(0)
+    end 
   end 
 
   def updated_weight_arr(hash)
