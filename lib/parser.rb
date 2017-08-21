@@ -35,7 +35,6 @@ MULTIPLIER = 1
   end
 
   def parse_individual(determination, str)
-    p str
     create_input_hash(str, determination)
   end
 
