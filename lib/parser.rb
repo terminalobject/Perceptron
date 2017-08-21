@@ -13,16 +13,23 @@ MULTIPLIER = 1
       "how", "why", "memes"
     ]
     @key_words = [
-      "sex", "things", "number", "you'll", "these", "believe", "tips", "tweets",
+      "sex", "things", "number", "these", "believe", "tips", "tweets",
       "never", "photos", "photo", "best", "make", "just", "kardashian",
-      "jenner", "memes"
+      "jenner", "memes", "people", "times", "worst", "questions", "never",
+      "know", "this", "what", "ways"
     ]
     @key_phrases = [
       "here's why", "here's what", "you'll never", "that will", "this is", "how to",
       "the most", "what this", "when you", "and it's", "and we'll", "wait till",
       "this guy", "blow your", "the reason", "make you", "looks like", "pictures of",
-      "the internet", "can you", "you didn't", "you need", "here's how", "it looks"
+      "the internet", "can you", "you didn't", "you need", "here's how", "it looks",
+      "will make"
     ]
+
+    @key_pronouns = [
+      "i", "he", "she", "you", "my", "you'll", "me", "yours", "your", "you're", "mine"
+    ]
+
   end
 
   def load_file(file)
@@ -48,27 +55,42 @@ private
     {
       vector: [MULTIPLIER,
                first_word(headline),
-               key_words(headline) + number_occurrences(headline),
-               key_phrases(headline)],
+               key_words(headline),
+               number_occurrences(headline),
+               key_phrases(headline),
+               key_pronouns(headline)],
       expected: determination
     }
   end
 
   def first_word(headline)
-    starting_pronouns.inject(0) { |r, w| headline.first.split(" ")[0].to_i != 0 &&
-      headline.first.split(" ")[0].to_i < 50 &&
-      r == 0 || headline.first.split(' ')[0] == w ? r + 1 : r }
+    starting_pronouns.inject(0) { |r, w| headline.first.downcase.split(" ")[0].to_i != 0 &&
+      headline.first.downcase.split(" ")[0].to_i < 50 &&
+      r == 0 || headline.first.downcase.split(' ')[0] == w ? r + 1 : r }
   end
 
   def key_words(headline)
-    @key_words.inject(0) { |r, word| headline.first.downcase.include?(word) ? r + 1 : r }
+    @key_words.inject(0) { |r, word| headline.first.downcase.split(" ").include?(word) ? r + 1 : r }
   end
 
   def key_phrases(headline)
-    @key_phrases.inject(0) { |r, phrase| headline.first.downcase.include?(phrase) ? r + 1 : r }
+    @key_phrases.inject(0) { |r, phrase| headline.first.downcase.split(" ").include?(phrase) ? r + 1 : r }
+  end
+
+  def key_pronouns(headline)
+
+  end
+
+  def key_pronouns(headline)
+    @key_pronouns.reduce(0) { |r, word| headline.first.downcase.split(" ").include?(word) ? r + 1 : r }
   end
 
   def number_occurrences(headline)
-    headline.first.scan(/\d+/).count
+    headline.first[0].scan(/\d+/).count
+  end
+
+  def the_and_number(headline)
+
+
   end
 end

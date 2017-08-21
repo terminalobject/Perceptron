@@ -3,10 +3,10 @@ require 'matrix'
 class Weight
   attr_reader :vector
 
-  INITIAL_BIAS = -3
+  INITIAL_BIAS = 0
 
   def initialize(features_number)
-    @values = Array.new(features_number) { rand(0.0..1.0).round(2)}
+    @values = Array.new(features_number, 0)
     @vector = vector_init(@values)
   end
 

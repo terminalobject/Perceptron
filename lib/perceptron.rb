@@ -3,6 +3,8 @@ require_relative 'weight'
 
 class Perceptron
 
+  attr_reader :weight
+
 
   def initialize(features_number, weight = Weight.new(features_number))
     @weight = weight

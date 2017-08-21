@@ -21,7 +21,7 @@ class Sanitiser
     create_output_files
     @data.each do |headline|
       vector = parser.parse_individual(:good, headline)
-      if vector[:vector][1..3].reduce(:+) >= 1
+      if vector[:vector][1..5].reduce(:+) >= 2
         p "BAD: #{vector[:vector]} || #{headline}"
         @bad_file.puts headline
       else
@@ -37,8 +37,8 @@ class Sanitiser
 
 
   def create_output_files
-    @good_file = File.new('scraper/training_data/good.txt', 'a')
-    @bad_file = File.new('scraper/training_data/bad.txt', 'a')
+    @good_file = File.new('scraper/training_data/new_good.txt', 'a')
+    @bad_file = File.new('scraper/training_data/new_bad.txt', 'a')
   end
 
   # def open_output_files

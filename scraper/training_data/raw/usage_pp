@@ -1,0 +1,11 @@
+require "./lib/parser.rb"
+require "./lib/weight"
+require "./lib/perceptron"
+p = Parser.new
+p.load_file("./scraper/training_data/bad.txt")
+p.parse(:bad)
+p.load_file("./scraper/training_data/good.txt")
+p.parse(:good)
+w = Weight.new(5)
+pp = Perceptron.new(5,w)
+p.parse_data.each { |hash| pp.train(hash) }
