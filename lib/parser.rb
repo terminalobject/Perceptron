@@ -27,7 +27,7 @@ MULTIPLIER = 1
     ]
 
     @key_pronouns = [
-      "i", "he", "she", "you", "my", "you'll", "me", "yours", "your", "you're", "mine"
+      "i", "he", "she", "you", "my", "you'll", "me", "yours", "your", "you're", "mine", "their"
     ]
 
   end
@@ -78,10 +78,6 @@ private
   end
 
   def key_pronouns(headline)
-
-  end
-
-  def key_pronouns(headline)
     @key_pronouns.reduce(0) { |r, word| headline.first.downcase.split(" ").include?(word) ? r + 1 : r }
   end
 
@@ -89,8 +85,12 @@ private
     headline.first[0].scan(/\d+/).count
   end
 
+  def is_i?(string)
+    /\A[-+]?\d+\z/ === string 
+  end
+
   def the_and_number(headline)
-
-
+    the_arr = headline.first.downcase.split(" ").each_index.select{|i| headline.first.downcase.split(" ")[i] == 'the'}
+    the_arr.inject(0){|r, item| is_i?(headline.first.downcase.split(" ")[item + 1]) ? r + 1 : r }
   end
 end
