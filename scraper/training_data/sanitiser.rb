@@ -17,15 +17,13 @@ class Sanitiser
     @zipped_data = data.zip(parser.parse_data)
   end
 
-  def clean_data
+  def clean_data(determination)
     create_output_files
     @data.each do |headline|
-      vector = parser.parse_individual(:good, headline)
-      if vector[:vector][1..5].reduce(:+) >= 2
-        p "BAD: #{vector[:vector]} || #{headline}"
+      vector = parser.parse_individual(:determination, headline)
+      if vector[:vector][1..5].reduce(:+) >= 1
         @bad_file.puts headline
       else
-        # p "GOOD: #{vector[:vector]} || #{headline}"
         @good_file.puts headline
       end
       @counter += 1

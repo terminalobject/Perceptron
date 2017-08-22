@@ -57,14 +57,14 @@ private
                first_word(headline),
                key_words(headline),
                number_occurrences(headline),
-               key_phrases(headline),
+               key_phrases(headline) + the_and_number(headline),
                key_pronouns(headline)],
       expected: determination
     }
   end
 
   def first_word(headline)
-    starting_pronouns.inject(0) { |r, w| headline.first.downcase.split(" ")[0].to_i != 0 &&
+    @starting_pronouns.inject(0) { |r, w| headline.first.downcase.split(" ")[0].to_i != 0 &&
       headline.first.downcase.split(" ")[0].to_i < 50 &&
       r == 0 || headline.first.downcase.split(' ')[0] == w ? r + 1 : r }
   end
@@ -74,7 +74,7 @@ private
   end
 
   def key_phrases(headline)
-    @key_phrases.inject(0) { |r, phrase| headline.first.downcase.split(" ").include?(phrase) ? r + 1 : r }
+    @key_phrases.inject(0) { |r, phrase| headline.first.downcase.include?(phrase) ? r + 1 : r }
   end
 
   def key_pronouns(headline)
@@ -86,7 +86,7 @@ private
   end
 
   def is_i?(string)
-    /\A[-+]?\d+\z/ === string 
+    /\A[-+]?\d+\z/ === string
   end
 
   def the_and_number(headline)
