@@ -1,0 +1,14 @@
+require ('./lib/parser.rb')
+require ('./lib/perceptron.rb')
+p = Perceptron.new(5)
+parser = Parser.new
+parser.load_file('scraper/training_data/sanitised_good.txt')
+parser.parse(:good)
+parser.load_file('scraper/training_data/sanitised_bad.txt')
+parser.parse(:bad)
+
+6.times { parser.parse_data.each { |hash| p.train(hash) }}
+p.weight
+
+Weight converged after 6 times
+#<Weight:0x007fed1108f7e0 @values=[0, 0, 0, 0, 0, 0], @vector=Vector[-2, 2, 2, 2, 2, 2]>
